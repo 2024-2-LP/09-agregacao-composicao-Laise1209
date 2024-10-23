@@ -27,11 +27,36 @@ public class Biblioteca {
     }
 
     public void removerLivroPorTitulo(String titulo){
-        for(int i = 0; i <= livros.size(); i++){
+        for(int i = 0; i < livros.size(); i++){
             if(livros.get(i).getTitulo().equalsIgnoreCase(titulo)) {
                 livros.remove(i);
             }
         }
+    }
+
+    public Livro buscarLivroPorTitulo(String titulo){
+        if(titulo != null && !titulo.isBlank()){
+            for(Livro livroDaVez : livros){
+                if(livroDaVez.getTitulo().equalsIgnoreCase(titulo)){
+                    return livroDaVez;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Integer contarLivros(){
+        return livros.size();
+    }
+
+    public List<Livro> obterLivrosAteAno(Integer ano){
+        List<Livro> livrosPublicados = new ArrayList<>();
+        for(Livro livroDaVez : livros){
+            if(livroDaVez.getDataPublicacao().getYear() <= ano){
+                livrosPublicados.add(livroDaVez);
+            }
+        }
+        return livrosPublicados;
     }
 
     public String getNome() {
