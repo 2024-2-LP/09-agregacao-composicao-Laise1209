@@ -8,51 +8,39 @@ public class Livro {
     private String titulo;
     private String autor;
     private LocalDate dataPublicacao;
-    private List<Livro> livros;
-    private List<Avaliacao> avaliacoes;
+    private List<Avaliacao> avaliacoes = new ArrayList<>();
 
-    public List<Avaliacao> getAvaliacoes() {
-        return avaliacoes;
-    }
-
-    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-        this.avaliacoes = avaliacoes;
-    }
-
-    public Livro(String titulo, String autor, LocalDate dataPublicacao, List<Livro> livros, List<Avaliacao> avaliacoes) {
+    public Livro(String titulo, String autor, LocalDate dataPublicacao) {
         this.titulo = titulo;
         this.autor = autor;
         this.dataPublicacao = dataPublicacao;
-        this.livros = livros;
-        this.avaliacoes = avaliacoes;
+        this.avaliacoes = new ArrayList<>();
     }
 
     public Livro() {}
 
     public void adicionarAvaliacao(String descricao, Double qtdEstrelas){
-        if(descricao != null || !descricao.equals(" ")){
-            if(qtdEstrelas <= 5 && qtdEstrelas >= 0){
-                livros.add((Livro) avaliacoes);
+        if(descricao != null && !descricao.isBlank()){
+            if(qtdEstrelas != null && qtdEstrelas <= 5 && qtdEstrelas >= 0){
+                Avaliacao avaliacao01 = new Avaliacao(descricao, qtdEstrelas);
+                avaliacoes.add(avaliacao01);
             }
         }
     }
 
     public Double calcularMediaAvaliacoes(){
-        Double media = 0.0;
-        if(!livros.isEmpty()){
-            for (int i = 0; i <= livros.size(); i++){
-                media += avaliacoes.get(i).getQtdEstrelas();
-            }
+        Integer quatidade = avaliacoes.size();
+        Double qtdEstrelas = 0.0;
+
+        if(avaliacoes.isEmpty()){
+            return 0.0;
         }
-        return media;
-    }
 
-    public List<Livro> getLivros() {
-        return livros;
-    }
+        for(Avaliacao avaliacaoDaVez : avaliacoes){
+            qtdEstrelas += avaliacaoDaVez.getQtdEstrelas();
+        }
 
-    public void setLivros(List<Livro> livros) {
-        this.livros = livros;
+        return qtdEstrelas/quatidade;
     }
 
     public String getTitulo() {
@@ -77,5 +65,23 @@ public class Livro {
 
     public void setDataPublicacao(LocalDate dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    @Override
+    public String toString() {
+        return "Livro{" +
+                "titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", dataPublicacao=" + dataPublicacao +
+                ", avaliacoes=" + avaliacoes +
+                '}';
     }
 }

@@ -1,30 +1,37 @@
 package school.sptech;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
     private String nome;
-    private List<Livro> livros;
-    private List<Biblioteca> bibliotecas;
+    private List<Livro> livros = new ArrayList<>();
 
-    public Biblioteca(String nome, List<Livro> livros, List<Biblioteca> bibliotecas) {
+    public Biblioteca(String nome) {
         this.nome = nome;
-        this.livros = livros;
-        this.bibliotecas = bibliotecas;
+        this.livros = new ArrayList<>();
     }
 
     public Biblioteca() {}
 
     public void adicionarLivro(Livro livro){
-        if(livros != null){
-            for(int i = 0; i <= livros.size(); i++) {
-
+        if(livro != null){
+            if (livro.getTitulo() != null && !livro.getTitulo().isBlank()){
+                if (livro.getAutor() != null && !livro.getAutor().isBlank()){
+                    if(livro.getDataPublicacao() != null){
+                        livros.add(livro);
+                    }
+                }
             }
         }
     }
 
     public void removerLivroPorTitulo(String titulo){
-
+        for(int i = 0; i <= livros.size(); i++){
+            if(livros.get(i).getTitulo().equalsIgnoreCase(titulo)) {
+                livros.remove(i);
+            }
+        }
     }
 
     public String getNome() {
@@ -35,5 +42,13 @@ public class Biblioteca {
         this.nome = nome;
     }
 
-
+    @Override
+    public String toString() {
+        return "Biblioteca{" +
+                "nome='" + nome + '\'' +
+                ", livros=" + livros +
+                '}';
+    }
 }
+
+

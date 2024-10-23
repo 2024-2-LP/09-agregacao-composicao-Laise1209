@@ -28,4 +28,12 @@ public class Avaliacao {
     public void setQtdEstrelas(Double qtdEstrelas) {
         this.qtdEstrelas = qtdEstrelas;
     }
+
+    @Override
+    public String toString() {
+        return "Avaliacao{" +
+                "descricao='" + descricao + '\'' +
+                ", qtdEstrelas=" + qtdEstrelas +
+                '}';
+    }
 }
